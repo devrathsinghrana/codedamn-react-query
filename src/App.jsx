@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import "./App.css";
+import BasicReactQuery from "./apps/BasicReactQuery";
+import ToggleButtonReactQuery from "./apps/ToggleButtonReactQuery";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [app, setApp] = useState("basic-react-query-app");
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <button onClick={() => setApp("basic-react-query-app")}>
+        Basic React query app
+      </button>
+      <button onClick={() => setApp("toggle-button-react-query-app")}>
+        Toggle Button React query app
+      </button>
+      {(() => {
+        switch (app) {
+          case "basic-react-query-app":
+            return <BasicReactQuery />;
+          case "toggle-button-react-query-app":
+            return <ToggleButtonReactQuery />;
+          default:
+            return <BasicReactQuery />;
+        }
+      })()}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
