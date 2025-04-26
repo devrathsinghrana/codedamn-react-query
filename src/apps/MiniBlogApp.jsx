@@ -10,6 +10,7 @@ const Post = ({ postId, goBack }) => {
     queryFn: () =>
       fetcher(`https://jsonplaceholder.typicode.com/posts/${postId}`),
     cacheTime: 0,
+    staleTime: Infinity,
   });
   if (isLoading) return <h1>Loading...</h1>;
   return (
@@ -28,6 +29,11 @@ const MiniBlogApp = () => {
   });
   const [postId, setPostId] = useState(null);
 
+  const mutateCacheData = (id) => {
+    queryClient.setQueryData(["post", id], (oldData) => {
+      oldData.title ? (oldData.title = "boom boom") : ""; //this will not mutate the title from list as that is mapped to different key ["posts"]
+    });
+  };
   const goBack = () => setPostId(null);
   if (postId) {
     return <Post postId={postId} goBack={goBack} />;
@@ -50,6 +56,9 @@ const MiniBlogApp = () => {
             <a href="#" onClick={() => setPostId(post.id)}>
               {post.id} - {post.title}
             </a>
+            <button onClick={() => mutateCacheData(post.id)}>
+              Mutate post details title
+            </button>
           </li>
         ))}
       </ul>
