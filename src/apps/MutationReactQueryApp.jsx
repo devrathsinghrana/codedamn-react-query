@@ -1,17 +1,22 @@
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 
-const time = (duration) => {
-  return new Promise((resolve) => {
+const time = (duration, isError = false) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve();
+      isError ? reject("Promise rejected") : resolve("Promise resolved");
       console.log("Promise was run!!");
     }, duration);
   });
 };
 
 const MutationReactQueryApp = () => {
-  const mutation = useMutation({ mutationFn: () => time(1000) });
+  const mutation = useMutation({
+    mutationFn: () => time(1000),
+    onSuccess: (data) => console.log("Success", data),
+    onError: (err) => console.log("Error", err),
+    onSettled: (data, err) => console.log("Settled", data, err),
+  });
 
   const callMutate = async () => {
     console.log("Updating post...");
