@@ -5,6 +5,7 @@ import ToggleButtonReactQuery from "./apps/ToggleButtonReactQuery";
 import GithubReposDataApp from "./apps/GithubReposDataApp";
 import MiniBlogApp from "./apps/MiniBlogApp";
 import GetQueryDataApp from "./apps/GetQueryDataApp";
+import MutationReactQueryApp from "./apps/MutationReactQueryApp";
 
 function App() {
   const [app, setApp] = useState("basic-react-query-app");
@@ -33,6 +34,11 @@ function App() {
           Get quey data App
         </button>
       </div>
+      <div>
+        <button onClick={() => setApp("mutation-react-query")}>
+          Mutation react query App
+        </button>
+      </div>
 
       {(() => {
         switch (app) {
@@ -46,6 +52,8 @@ function App() {
             return <GithubReposDataApp />;
           case "get-query-data":
             return <GetQueryDataApp />;
+          case "mutation-react-query":
+            return <MutationReactQueryApp />;
           default:
             return <BasicReactQuery />;
         }
