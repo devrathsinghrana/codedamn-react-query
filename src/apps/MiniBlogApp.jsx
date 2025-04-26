@@ -24,6 +24,7 @@ const MiniBlogApp = () => {
   const { data: posts, isLoading } = useQuery({
     queryKey: ["posts"],
     queryFn: () => fetcher("https://jsonplaceholder.typicode.com/posts"),
+    select: (result) => result.slice(1, 4),
   });
   const [postId, setPostId] = useState(null);
 
