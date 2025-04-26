@@ -13,7 +13,10 @@ const time = (duration, isError = false) => {
 const MutationReactQueryApp = () => {
   const mutation = useMutation({
     mutationFn: () => time(1000),
-    onSuccess: (data) => console.log("Success", data),
+    onSuccess: (data) => {
+      // It can be successful with setQueryData where you can update UI based on post request response by mutating the cache
+      console.log("Success", data);
+    },
     onError: (err) => console.log("Error", err),
     onSettled: (data, err) => console.log("Settled", data, err),
   });
