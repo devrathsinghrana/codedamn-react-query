@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import queryClient from "../react-query-client";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -38,6 +39,12 @@ const MiniBlogApp = () => {
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
+            <b>
+              {(() => {
+                const cachedPost = queryClient.getQueryData(["post", post.id]);
+                return cachedPost ? "(visited) " : "";
+              })()}
+            </b>
             <a href="#" onClick={() => setPostId(post.id)}>
               {post.id} - {post.title}
             </a>
