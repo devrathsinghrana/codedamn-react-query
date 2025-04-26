@@ -9,6 +9,7 @@ const Post = ({ postId, goBack }) => {
     queryKey: ["post", postId],
     queryFn: () =>
       fetcher(`https://jsonplaceholder.typicode.com/posts/${postId}`),
+    cacheTime: 0,
   });
   if (isLoading) return <h1>Loading...</h1>;
   return (
