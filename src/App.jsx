@@ -6,6 +6,7 @@ import GithubReposDataApp from "./apps/GithubReposDataApp";
 import MiniBlogApp from "./apps/MiniBlogApp";
 import GetQueryDataApp from "./apps/GetQueryDataApp";
 import MutationReactQueryApp from "./apps/MutationReactQueryApp";
+import ToDoApp from "./apps/ToDoApp";
 
 function App() {
   const [app, setApp] = useState("basic-react-query-app");
@@ -39,6 +40,12 @@ function App() {
           Mutation react query App
         </button>
       </div>
+      <div>
+        <button onClick={() => setApp("to-do-app")}>
+          To Do App
+        </button>
+      </div>
+      
 
       {(() => {
         switch (app) {
@@ -54,6 +61,8 @@ function App() {
             return <GetQueryDataApp />;
           case "mutation-react-query":
             return <MutationReactQueryApp />;
+            case "to-do-app":
+            return <ToDoApp />;
           default:
             return <BasicReactQuery />;
         }
